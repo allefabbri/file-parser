@@ -48,7 +48,7 @@ std::vector< std::vector<std::string> > Parse_file(std::string file_name, std::s
 // Parsing loop
 	while ( getline(file_to_parse, line) ){
 	  boost::algorithm::trim(line);  // remove leading/trailing spaces
-	  if( !line.size() ) continue;   // ignore empty lines
+	  if( Belongs_to(line[0],comment) || !line.size() ) continue;   // ignore empty and comment lines
 	  boost::algorithm::split(tokens, line, boost::algorithm::is_any_of(separators), boost::token_compress_on);  // split line to tokens, BOOST required
 	  std::transform(tokens[0].begin(), tokens[0].end(), tokens[0].begin(), ::tolower);  // convert to lower, NOT UTF-8 compatible
 	  for(int i=0; i<tokens.size(); i++){  // remove inline comments
